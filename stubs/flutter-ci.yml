@@ -1,0 +1,14 @@
+name: flutter-ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  ci:
+    uses: ekawijayasusilo/proto_codecare/.github/workflows/flutter-ci.reusable.yml@v1.0.0 # x-release-please-version
+    with:
+      flutter_version_file: pubspec.yaml
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

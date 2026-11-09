@@ -1,0 +1,19 @@
+name: flutter-android-build
+
+on:
+  pull_request:
+    paths:
+      - pubspec.yaml
+      - android/**
+
+concurrency:
+  group: flutter-android-build-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  android-build:
+    uses: ekawijayasusilo/proto_codecare/.github/workflows/flutter-android-build.reusable.yml@v1.0.0 # x-release-please-version
+    with:
+      # Apps with flavors need a flavor and entrypoint, e.g.:
+      # build_args: --flavor development -t lib/main_development.dart
+      build_args: ""

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>ekawijayasusilo/proto_codecare_scripts//version-control/renovate-configs/default#v1.0.0"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Runner global config tag in RENOVATE_GLOBAL_EXTENDS. No built-in manager reads env vars, so without this the runner stays on an old runner.json while client presets move on, and new postUpgradeTasks commands get rejected by allowedCommands.",
+      "managerFilePatterns": ["/^\\.github/workflows/renovate\\.yml$/"],
+      "matchStrings": ["proto_codecare_scripts//version-control/renovate-configs/runner#(?<currentValue>v\\d+\\.\\d+\\.\\d+)"],
+      "depNameTemplate": "ekawijayasusilo/proto_codecare_scripts",
+      "datasourceTemplate": "github-tags"
+    }
+  ]
+}
