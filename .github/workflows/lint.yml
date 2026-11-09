@@ -1,0 +1,32 @@
+name: lint
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # actionlint pinned to v1.7.12; the download script takes the version
+      # without the leading "v" and requires the install dir to exist.
+      - name: Install actionlint
+        run: |
+          mkdir -p "$RUNNER_TEMP/bin"
+          curl -fsSL "https://raw.githubusercontent.com/rhysd/actionlint/v1.7.12/scripts/download-actionlint.bash" | bash -s "1.7.12" "$RUNNER_TEMP/bin"
+
+      # Runs shellcheck on run: scripts too (preinstalled on ubuntu runners).
+      - name: Lint workflows
+        run: |
+          # actionlint v1.7.12 does not yet model these documented reusable-workflow fields.
+          "$RUNNER_TEMP/bin/actionlint" \
+            -ignore 'property "workflow_(repository|sha)" is not defined in object type'

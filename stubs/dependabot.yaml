@@ -1,0 +1,22 @@
+# Security updates only. Routine version updates are handled by Renovate (.github/renovate.json5).
+# open-pull-requests-limit: 0 disables version updates; security updates have their own fixed
+# limit and still follow commit-message, which keeps PR titles semantic (vulnerability(deps): ...).
+version: 2
+updates:
+  - package-ecosystem: "pub"
+    # Pub workspace: the single root pubspec.lock covers all packages.
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    commit-message:
+      prefix: "vulnerability"
+      include: "scope"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+    commit-message:
+      prefix: "vulnerability"
+      include: "scope"
