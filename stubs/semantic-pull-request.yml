@@ -1,9 +1,0 @@
-name: semantic-pull-request
-
-on:
-  pull_request:
-    types: [opened, edited, synchronize, reopened]
-
-jobs:
-  semantic-pull-request:
-    uses: ekawijayasusilo/proto_codecare/.github/workflows/semantic-pull-request.reusable.yml@v1.0.0 # x-release-please-version
