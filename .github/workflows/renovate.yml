@@ -1,11 +1,9 @@
 name: Renovate
 
 on:
-  # Disabled until shared_workflow's runner is turned off: two runners on the same App would
-  # process the same repos at the same time.
-  # schedule:
-  #   # 03:17 Asia/Jakarta, inside the presets' "before 6am" window.
-  #   - cron: "17 20 * * *"
+  schedule:
+    # Monday/Thursday 00:00 Asia/Jakarta (Sunday/Wednesday UTC), inside the presets' "before 6am" window.
+    - cron: "0 17 * * 0,3"
   workflow_dispatch:
 
 concurrency:
